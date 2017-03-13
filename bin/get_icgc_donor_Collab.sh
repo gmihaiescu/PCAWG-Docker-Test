@@ -15,6 +15,7 @@ mkdir -p $tumor_tmp
 mkdir -p $normal_tmp
 mkdir -p $donor_dir
 
+docker pull icgc/icgc-storage-client:latest
 echo "Downloading tumor data for $donor. Tumor: $tumor - Normal: $normal"
 
 echo "Downloading tumor BAM: $tumor"
