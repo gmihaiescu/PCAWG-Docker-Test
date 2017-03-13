@@ -3,13 +3,18 @@
 workflow=$1
 donor=$2
 type=$3
+release_file=$4
 
 base_dir=$(dirname $(dirname $(readlink -f bin/get_gnos_donor.sh)))
 directory="$base_dir/tests/$workflow/$donor/"
 output_dir="$directory/output/"
 PCAWG_dir="$base_dir/PCAWG/"
 
-release_file="$PCAWG_dir/release_may2016.v1.2.tsv"
+# Find the latest release available on http://pancancer.info/data_releases/latest/?C=M;O=D
+# As of March 13, 2017 the latest release is "release_may2016.v1.4.tsv"
+wget http://pancancer.info/data_releases/latest/$release_file -O PCAWG/$release_file
+
+release_file="$PCAWG_dir/$release_file"
 
 aliquote=$(grep $donor "${PCAWG_dir}/donor_wgs_samples" | cut -f 2)
 
